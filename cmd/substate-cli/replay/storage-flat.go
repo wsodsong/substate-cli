@@ -32,11 +32,13 @@ Output log format: (block, timestamp, transaction, account, in/out, storage addr
 // getStorageFlatDataTask replays storage access of accounts in each transaction
 func getStorageFlatDataTask(block uint64, tx int, st *substate.Substate, taskPool *substate.SubstateTaskPool) error {
 	timestamp := st.Env.Timestamp
+	var msg string
 	for wallet, outputAlloc := range st.OutputAlloc {
 		for storageAddress, value := range outputAlloc.Storage {
-			fmt.Printf("metric: %v,%v,%v,%v,%v,%v\n",block, timestamp, tx, wallet.Hex(), storageAddress.Hex(), value)
+			msg += 	fmt.Sprintf("metric: %v,%v,%v,%v,%v,%v\n",block, timestamp, tx, wallet.Hex(), storageAddress.Hex(), value)
 		}
 	}
+	fmt.Printf("%v", msg)
 	return nil
 }
 
@@ -52,6 +54,10 @@ func getStorageFlatDataAction(ctx *cli.Context) error {
 	fmt.Printf("chain-id: %v\n",chainID)
 	fmt.Printf("git-date: %v\n", gitDate)
 	fmt.Printf("git-commit: %v\n",gitCommit)
+
+	//if db, err := sql.Open("sqlite3", "/var/data/storage.db"), err {
+	//	panic(err)
+	//}
 
 	first, ferr := strconv.ParseInt(ctx.Args().Get(0), 10, 64)
 	last, lerr := strconv.ParseInt(ctx.Args().Get(1), 10, 64)

@@ -6,7 +6,6 @@ require (
 	github.com/Fantom-foundation/go-opera v1.1.1-rc.2
 	github.com/ethereum/go-ethereum v1.10.8
 	github.com/syndtr/goleveldb v1.0.1-0.20210305035536-64b5b1c73954
-	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e
 	gopkg.in/urfave/cli.v1 v1.20.0
 )
 
